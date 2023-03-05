@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>My Hello World</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <!--<script type="text/javascript" src='node_modules/crypto-js/crypto-js.js'>
+
+    </script>-->
+</head>
+<body>
+    <!--<script type="text/javascript">-->
+    <script type="module" >
+        const axios = require('axios');
+        const niceList = require('../utils/niceList.json');
+        const MerkleTree = require('../utils/MerkleTree');
+
+        //import axios from 'axios'
+        //import niceList from '../utils/niceList.json'
+        //import MerkleTree from '../utils/MerkleTree'
+
+        const serverUrl = 'http://localhost:1225';
+
+        async function main() {
+            // TODO: how do we prove to the server we're on the nice list? 
+            let merkelTree = new MerkleTree(niceList)
+            let root = merkelTree.getRoot()
+            let proof = merkelTree.getProof(-2)
+            console.log('Root: ' + root)
+            console.log('Proof: ' + JSON.stringify(proof))
+            let xx = 'DD Xyi'
+           // const { data: gift } = await axios.post(`/gift`, {
+            const { data: gift } = await axios.post(`${serverUrl}/gift`, {
+                // TODO: add request body parameters here!
+                name: xx
+            });
+
+            console.log({ gift });
+        }
+
+        main();
+        </script>
+    <h1>Hello baby</h1>
+</body>
+</html>
+
+
+
+
